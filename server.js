@@ -9,7 +9,7 @@ const {SaveProduct, DeleteProduct, MarkDone, PrintAll } = require("./productsMod
 mongoose.connect(process.env.MONGODB_URI, {
     useUnifiedTopology: true,
     useNewUrlParser: true,
-    useFindAndModify: true
+    useFindAndModify: false,
 })
 .then(() => console.log("connected to DB"))
 .then(app.listen(port, () => {
@@ -34,6 +34,10 @@ app.post("/save", async(req,res) => {
 
 app.put("/products/:id", async(req,res) => {
     await MarkDone(req.params.id)
-    res.status(200).send("Done")
+    res.status(200).send()
 })
 
+app.delete("/products/:id", async(req,res) => {
+    await DeleteProduct(req.params.id)
+    res.status(200).send()
+})

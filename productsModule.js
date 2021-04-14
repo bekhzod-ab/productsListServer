@@ -25,24 +25,22 @@ async function SaveProduct(bodyInput) {
     .catch((e) => console.log(e.message))
 }
 
-async function DeleteProduct(paramsId) {
-    await Products.findOneAndRemove({id: paramsId})
-    .then(()=> console.log(this.item + "was deleted"))
+function DeleteProduct(paramsId) {
+    return Products.findOneAndRemove({_id: paramsId})
+    .then((result)=> console.log(result.item + " was deleted"))
     .catch((e) => console.log(e.message))
 }
 
 
 async function MarkDone(paramsId) {
-    await Products.findOneAndUpdate({_id: paramsId}, {done: true}, {new: true} )
-    .then(() => console.log(" is done"))
+    const state = await Products.findOne({_id:paramsId })
+    
+    return Products.findOneAndUpdate({_id: paramsId}, {done: !state.done}, {new: true} )
+    .then((result) => console.log(result.item + " is done"))
     .catch((e) => console.log(e.message))
 }
-// async function PrintAll(req,res){
-//     await  Products.find({})
-//     .then((data)=> res.json(data))
-//     .catch((e) => console.log(e.message))
 
-// }
+
 function PrintAll(){
     return Products.find({})
     .then((data)=> data)
