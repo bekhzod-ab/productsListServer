@@ -27,8 +27,9 @@ app.use(express.json());
 app.get("/api/products",async(req,res) => {
     try{
         const products = await PrintAll()
-        res.status(200).json(products)}
-        catch {
+        res.status(200).json(products)
+    }
+    catch {
             res.status(500).send("timeout")
         }
     
