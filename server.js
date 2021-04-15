@@ -4,7 +4,7 @@ const mongoose = require("mongoose")
 const express = require("express")
 const path = require("path")
 const app = express()
-const port = process.env.PORT || 4004
+const port = process.env.PORT
 const {SaveProduct, DeleteProduct, MarkDone, PrintAll } = require("./productsModule.js")
 
 mongoose.connect(process.env.MONGODB_URI, {
