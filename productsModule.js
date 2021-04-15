@@ -44,7 +44,7 @@ async function MarkDone(paramsId) {
 function PrintAll(){
     return Products.find({})
     .then((data)=> data)
-    .catch((e) => console.log(e.message))
+    // .catch((e) => console.log(e.message))
     
 }
 
